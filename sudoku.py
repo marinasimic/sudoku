@@ -43,19 +43,19 @@ def is_used_in_column(col, number):
 def is_number_used(row, col, number):
     return is_used_in_row(row, number) or is_used_in_column(col, number) or is_used_in_square(row, col, number)
 
-def fill_diagonal_square_with_random_numbers(start, end):
-    used_numbers = ()
-    for i in range(start, end):
-        for j in range(start, end):
-            number = choice(list(set(range(1, 10)) - set(used_numbers)))
-            sudoku_board[i][j] = number
-            used_numbers = used_numbers + (number,)
+def fill_diagonal_squares_with_random_numbers():
+    diagonal_squares = [(0,3), (3,6), (6,9)]
+    for start, end in diagonal_squares:
+        used_numbers = ()
+        for i in range(start, end):
+            for j in range(start, end):
+                number = choice(list(set(range(1, 10)) - set(used_numbers)))
+                sudoku_board[i][j] = number
+                used_numbers = used_numbers + (number,)
 
 
 def create_sudoku_board():
-    fill_diagonal_square_with_random_numbers(0,3)
-    fill_diagonal_square_with_random_numbers(3,6)
-    fill_diagonal_square_with_random_numbers(6,9)
+    fill_diagonal_squares_with_random_numbers()
 
     print_board()
 
